@@ -1,17 +1,16 @@
 .header {
-	display: flex;
+  display: flex;
 	flex-direction: row;
+  position: relative;
 	justify-content: space-between;
 	padding: 10px 20px;
 	z-index: 10;
-	font-family: 'Montserrat', sans-serif;
 	letter-spacing: 3px;
 	background-color: white;
 	color: white;
 	-webkit-box-shadow: 0 8px 6px -6px black;
 	-moz-box-shadow: 0 8px 6px -6px black;
-	box-shadow: 0 8px 6px -6px black;
-	/* margin-bottom: 10px; */
+	box-shadow: 0 6px 8px -3px rgb(128, 128, 128);
 }
 
 .logo {
@@ -27,12 +26,11 @@
 	color: white;
 	font-size: 45px;
 	letter-spacing: 5px;
-	font-family: 'Montserrat', sans-serif;
 	text-align: center;
 
 }
 
-p {
+.header-description {
 	text-align: center;
 	color: white;
 	position: absolute;
@@ -40,17 +38,6 @@ p {
 	left: 50%;
 	width: 40%;
 	transform: translate(-50%, -50%);
-	font-family: 'Montserrat', sans-serif;
-
-}
-
-.cart-button {
-	background-color: transparent;
-	border: 0;
-}
-
-.cart-img {
-	height: 40%;
 }
 
 .hero-image {
