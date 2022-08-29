@@ -1,3 +1,9 @@
-.summary{
-  
+.drinks-title{
+  color: rgb(214, 139, 0);
+  letter-spacing: 3px;
+}
+
+.drinks-description{
+  color: rgb(107, 107, 107);
+  letter-spacing: 1px;
 }

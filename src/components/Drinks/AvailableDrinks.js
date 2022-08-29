@@ -1,3 +1,4 @@
+import Drink from './Drink'
 import classes from './AvailableDrinks.module.css'
 
 const dummyDrinks = [
@@ -66,7 +67,7 @@ const dummyDrinks = [
 
 const AvailableDrinks = () => {
   const drinksList = dummyDrinks.map((drink) => {
-    return <ul> <li>{drink.name}</li><li>{drink.ingredients}</li><li>{drink.price}</li> </ul>
+    return <ul> <li><Drink name={drink.name} ingredients={drink.ingredients} price={drink.price}/></li> </ul>
   })
 
   return (
