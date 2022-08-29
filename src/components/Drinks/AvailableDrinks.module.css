@@ -1,0 +1,13 @@
+ul{
+  list-style: none;
+}
+
+.drinks-list{
+  background-color: rgb(251, 251, 206);
+}
+
+.title{
+  padding-top: 50px;
+  color: rgb(214, 139, 0);
+  font-size: 25px;
+}

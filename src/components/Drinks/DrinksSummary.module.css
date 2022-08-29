@@ -1,9 +1,13 @@
 .drinks-title{
   color: rgb(214, 139, 0);
   letter-spacing: 3px;
+  padding-top: 50px;
+font-size: 30px;
 }
 
 .drinks-description{
   color: rgb(107, 107, 107);
   letter-spacing: 1px;
+  padding-bottom: 50px;
+  line-height: 25px;
 }

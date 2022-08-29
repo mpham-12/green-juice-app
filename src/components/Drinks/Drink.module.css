@@ -1,0 +1,14 @@
+.title{
+  font-weight: 500;
+  color: rgb(24, 69, 24);
+  font-size: 20px;
+}
+.ingredients{
+  font-weight: 300;
+  font-size: 18px;
+}
+.price{
+  font-weight: 300;
+  color: rgb(0, 0, 0);
+  font-size: 15px;
+}

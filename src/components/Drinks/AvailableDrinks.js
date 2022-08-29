@@ -71,7 +71,8 @@ const AvailableDrinks = () => {
   })
 
   return (
-    <section>
+    <section className={classes['drinks-list']}>
+      <h1 className={classes.title}>Our Weekly Juices</h1>
         {drinksList}
     </section>
   );
