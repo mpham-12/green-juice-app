@@ -67,7 +67,7 @@ const dummyDrinks = [
 
 const AvailableDrinks = () => {
   const drinksList = dummyDrinks.map((drink) => {
-    return <ul> <li><Drink key={drink.id} name={drink.name} ingredients={drink.ingredients} price={drink.price}/></li> </ul>
+    return <ul> <li><Drink id={drink.id} key={drink.id} name={drink.name} ingredients={drink.ingredients} price={drink.price}/></li> </ul>
   })
 
   return (
