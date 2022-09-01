@@ -1,0 +1,15 @@
+.form {
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.form-btn{
+  background-color: orange;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 15px;
+  color: white;
+  font-weight: 800;
+  margin-top: 10px;
+}
