@@ -67,13 +67,15 @@ const dummyDrinks = [
 
 const AvailableDrinks = () => {
   const drinksList = dummyDrinks.map((drink) => {
-    return <ul> <li><Drink id={drink.id} key={drink.id} name={drink.name} ingredients={drink.ingredients} price={drink.price}/></li> </ul>
+    return <Drink key={drink.id} id={drink.id} name={drink.name} ingredients={drink.ingredients} price={drink.price}/>
   })
 
   return (
     <section className={classes['drinks-list']}>
       <h1 className={classes.title}>This Week's Creations</h1>
+      <ul>
         {drinksList}
+      </ul>
     </section>
   );
 }
