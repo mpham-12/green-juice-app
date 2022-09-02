@@ -1,22 +1,45 @@
+import { useContext } from 'react';
 import Modal from '../UI/Modal'
 import classes from './Cart.module.css'
+import CartContext from '../../store/cart-context'
+import CartItem from './CartItem';
 
 
 const Cart = (props) => {
-  const dummyCart=[{ id: 'c1', name: 'green drink', quantity: 3, price: 9.99 }];
-  const cartItems = dummyCart.map((item) => {
-    return <div> {item.name}</div>
-  })
+  const cartCtx = useContext(CartContext);
+
+  const totalAmount = cartCtx.totalAmount.toFixed(2);
+
+  const removeCartItemHandler = (id) => {
+
+  }
+  const addCartItemHandler = (item) => {
+
+  }
+
+  const cartItems = (<ul>
+    {cartCtx.items.map((item) => {
+      return <CartItem
+        key={item.id}
+        name={item.name}
+        amount={item.amount}
+        price={item.price}
+        onRemove={removeCartItemHandler.bind(null, item.id)}
+        onAdd={addCartItemHandler.bind(null, item)} />
+
+    })}
+  </ul>
+  )
 
   return (
     <Modal onHide={props.onHideCart}>
       {cartItems}
       <div className={classes.total}>
         <span>Total</span>
-        <span>33.22</span>
+        <span>${totalAmount}</span>
       </div>
       <div className={classes.actions}>
-        <button className={classes.submit}>Submit</button>
+        {cartCtx.items.length > 0 && <button className={classes.submit}>Submit</button>}
         <button className={classes.close} onClick={props.onHideCart}>Close</button>
       </div>
     </Modal>
