@@ -17,7 +17,7 @@ const Cart = (props) => {
       </div>
       <div className={classes.actions}>
         <button className={classes.submit}>Submit</button>
-        <button className={classes.close}>Close</button>
+        <button className={classes.close} onClick={props.onHideCart}>Close</button>
       </div>
     </Modal>
   );
