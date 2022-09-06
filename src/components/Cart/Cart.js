@@ -18,7 +18,7 @@ const Cart = (props) => {
     cartCtx.addItem(cartItem);
   };
 
-  const cartItems = (<ul>
+  const cartItems = (<ul className={classes.cart}>
     {cartCtx.items.map((item) => {
       return <CartItem
         key={item.id}
