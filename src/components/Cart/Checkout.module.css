@@ -72,3 +72,9 @@
 	border-color: #aa0b20;
 	background-color: #ffeff1;
 }
+
+.inputValidity{
+  font-size: 12px;
+  color: #ca3e51;
+  margin: 2px 0px;
+}
