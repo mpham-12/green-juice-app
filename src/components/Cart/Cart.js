@@ -36,8 +36,16 @@ const Cart = (props) => {
     <Modal onHide={props.onHideCart}>
       {cartItems}
       <div className={classes.total}>
-        <span>Total</span>
+        <span>Sub Total</span>
         <span>${totalAmount}</span>
+      </div>
+      <div className={classes.total}>
+        <span>Taxes</span>
+        <span>${(totalAmount * 0.13).toFixed(2)}</span>
+      </div>
+      <div className={classes.total}>
+        <span>Total</span>
+        <span>${(totalAmount * 1.13).toFixed(2)}</span>
       </div>
       <div className={classes.actions}>
         {cartCtx.items.length > 0 && <button className={classes.submit}>Submit</button>}
