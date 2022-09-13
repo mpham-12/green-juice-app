@@ -44,12 +44,17 @@ const Checkout = (props) => {
 
     const formIsValid = enteredNameIsValid && enteredAddressIsValid && enteredCityIsValid && enteredPostalIsValid;
 
-
-
     if (!formIsValid) {
       return;
     }
 
+    props.onSubmit({
+      name:enteredName,
+      address:enteredAddress,
+      postal:enteredPostal,
+      city:enteredCity,
+
+    });
   }
 
   return (

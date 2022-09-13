@@ -25,6 +25,16 @@ const Cart = (props) => {
     setIsCheckout(true);
   }
 
+  const submitOrderHandler = (userData) => {
+    fetch('https://press-and-rest-default-rtdb.firebaseio.com/orders.json', {
+      method: 'POST',
+      body: JSON.stringify({
+        user: userData,
+        orderedItems: cartCtx.items
+      })
+    })
+  }
+
   const cartItems = (<ul className={classes.cart}>
     {cartCtx.items.map((item) => {
       return <CartItem
@@ -47,7 +57,7 @@ const Cart = (props) => {
   return (
     <Modal onHide={props.onHideCart}>
       {cartItems}
-      {isCheckout && <Checkout onCancel={props.onHideCart} />}
+      {isCheckout && <Checkout onSubmit={submitOrderHandler} onCancel={props.onHideCart} />}
       <div className={classes.total}>
         <span>Sub Total</span>
         <span>${totalAmount}</span>
