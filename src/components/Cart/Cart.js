@@ -4,9 +4,11 @@ import classes from './Cart.module.css'
 import CartContext from '../../store/cart-context'
 import CartItem from './CartItem';
 import Checkout from './Checkout';
+import { useState } from 'react';
 
 
 const Cart = (props) => {
+  const [isCheckout, setIsCheckout] = useState(false)
   const cartCtx = useContext(CartContext);
 
   const totalAmount = cartCtx.totalAmount.toFixed(2);
@@ -18,6 +20,10 @@ const Cart = (props) => {
     const cartItem = { ...item, amount: 1 };
     cartCtx.addItem(cartItem);
   };
+
+  const orderHandler = () => {
+    setIsCheckout(true);
+  }
 
   const cartItems = (<ul className={classes.cart}>
     {cartCtx.items.map((item) => {
@@ -33,10 +39,15 @@ const Cart = (props) => {
   </ul>
   )
 
+  const cartButtons = <div className={classes.actions}>
+    <button className={classes.close} onClick={props.onHideCart}>Close</button>
+    {cartCtx.items.length > 0 && <button className={classes.submit} onClick={orderHandler}>Submit</button>}
+  </div>
+
   return (
     <Modal onHide={props.onHideCart}>
       {cartItems}
-      <Checkout />
+      {isCheckout && <Checkout onCancel={props.onHideCart} />}
       <div className={classes.total}>
         <span>Sub Total</span>
         <span>${totalAmount}</span>
@@ -49,10 +60,7 @@ const Cart = (props) => {
         <span>Total</span>
         <span>${(totalAmount * 1.13).toFixed(2)}</span>
       </div>
-      <div className={classes.actions}>
-        <button className={classes.close} onClick={props.onHideCart}>Close</button>
-        {cartCtx.items.length > 0 && <button className={classes.submit}>Submit</button>}
-      </div>
+      {!isCheckout && cartButtons}
     </Modal>
   );
 }

@@ -9,6 +9,8 @@
 }
 
 .modal {
+  height: 70vh;
+	overflow: auto;
   position: fixed;
   margin-left: 1.5%;
   top: 8vh;
