@@ -5,9 +5,11 @@ import { useState } from 'react'
 
 const AvailableDrinks = () => {
   const [drinks, setDrinks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchDrinks = async () => {
+      setIsLoading(true);
       const response = await fetch('https://press-and-rest-default-rtdb.firebaseio.com/drinks.json')
       const data = await response.json();
       const loadedDrinks = [];
@@ -21,10 +23,19 @@ const AvailableDrinks = () => {
         })
       }
       setDrinks(loadedDrinks);
+      setIsLoading(false);
     }
     fetchDrinks()
   }, [])
-// console.log('drinks', drinks)
+
+if (isLoading){
+  return (
+    <section className={classes.loading}>
+      <p>Loading...</p>
+    </section>
+  )
+}
+
   const drinksList = drinks.map((drink) => {
     return <Drink key={drink.id} id={drink.id} name={drink.name} ingredients={drink.ingredients} price={drink.price} />
   })
