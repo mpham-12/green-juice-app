@@ -3,6 +3,7 @@ import Modal from '../UI/Modal'
 import classes from './Cart.module.css'
 import CartContext from '../../store/cart-context'
 import CartItem from './CartItem';
+import Checkout from './Checkout';
 
 
 const Cart = (props) => {
@@ -35,6 +36,7 @@ const Cart = (props) => {
   return (
     <Modal onHide={props.onHideCart}>
       {cartItems}
+      <Checkout />
       <div className={classes.total}>
         <span>Sub Total</span>
         <span>${totalAmount}</span>
