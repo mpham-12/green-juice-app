@@ -1,73 +1,32 @@
 import Drink from './Drink'
 import classes from './AvailableDrinks.module.css'
-
-const dummyDrinks = [
-  {
-    id: 'd1',
-    name: 'Dandy Mandy 250ml',
-    ingredients: 'celery - kale - swiss chard - dandelion - parsley - lemon - ginger - cucumber',
-    price: 9.99
-  },
-  {
-    id: 'd2',
-    name: 'Pure Celery 250ml',
-    ingredients: 'celery',
-    price: 9.99
-  },
-  {
-    id: 'd3',
-    name: 'Blue Magic 250ml',
-    ingredients: 'blu majik algae - pineapple - stevia - lime - alkaline water',
-    price: 9.99
-  },
-  {
-    id: 'd4',
-    name: 'Mama Chia 250ml',
-    ingredients: 'apple - chia seeds - cinnamon - alkaline water',
-    price: 9.99
-  },
-  {
-    id: 'd5',
-    name: 'Pineapple Chia 250ml',
-    ingredients: 'pineapple - chia - coconut water',
-    price: 9.99
-  },
-  {
-    id: 'd6',
-    name: 'Boldly Green 250ml',
-    ingredients: 'spinach - lemon - cucumber - celery - ginger',
-    price: 9.99
-  },
-  {
-    id: 'd7',
-    name: 'Fiesty 250ml',
-    ingredients: 'apple - burdock root - lemon - ginger - turmeric - cayenne',
-    price: 9.99
-  },
-  {
-    id: 'd8',
-    name: 'Power Me Up 250ml',
-    ingredients: 'cucumber - spinach - kale - arugula - fennel - basil - apple - lemon',
-    price: 9.99
-  },
-  {
-    id: 'd9',
-    name: 'Tutti Frutti 250ml',
-    ingredients: 'pineapple - orange - strawberry - lemon - ginger',
-    price: 9.99
-  },
-  {
-    id: 'd10',
-    name: 'Just Beet It 250ml',
-    ingredients: 'apple - beet - pear - lemon - ginger',
-    price: 9.99
-  }
-]
-
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 const AvailableDrinks = () => {
-  const drinksList = dummyDrinks.map((drink) => {
-    return <Drink key={drink.id} id={drink.id} name={drink.name} ingredients={drink.ingredients} price={drink.price}/>
+  const [drinks, setDrinks] = useState([]);
+
+  useEffect(() => {
+    const fetchDrinks = async () => {
+      const response = await fetch('https://press-and-rest-default-rtdb.firebaseio.com/drinks.json')
+      const data = await response.json();
+      const loadedDrinks = [];
+      
+      for (const key in data) {
+        loadedDrinks.push({
+          id: key,
+          name: data[key].name,
+          ingredients: data[key].ingredients,
+          price: data[key].price
+        })
+      }
+      setDrinks(loadedDrinks);
+    }
+    fetchDrinks()
+  }, [])
+// console.log('drinks', drinks)
+  const drinksList = drinks.map((drink) => {
+    return <Drink key={drink.id} id={drink.id} name={drink.name} ingredients={drink.ingredients} price={drink.price} />
   })
 
   return (
