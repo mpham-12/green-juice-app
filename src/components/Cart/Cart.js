@@ -48,8 +48,8 @@ const Cart = (props) => {
         <span>${(totalAmount * 1.13).toFixed(2)}</span>
       </div>
       <div className={classes.actions}>
-        {cartCtx.items.length > 0 && <button className={classes.submit}>Submit</button>}
         <button className={classes.close} onClick={props.onHideCart}>Close</button>
+        {cartCtx.items.length > 0 && <button className={classes.submit}>Submit</button>}
       </div>
     </Modal>
   );
