@@ -1,18 +1,37 @@
-ul{
-  list-style: none;
+ul {
+	list-style: none;
 }
 
-.drinks-list{
-  background-color: rgb(251, 251, 206);
+.drinks-list {
+	background-color: rgb(251, 251, 206);
 }
 
-.title{
-  padding-top: 50px;
-  color: rgb(214, 139, 0);
-  font-size: 25px;
+.title {
+	padding-top: 50px;
+	color: rgb(214, 139, 0);
+	font-size: 25px;
 }
 
-.loading{
-  color: rgb(214, 139, 0);
-  font-size: 25px;
+.loading {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+	color: rgb(214, 139, 0);
+  font-size: 16px;
+	border: 1px solid rgb(210, 116, 1);
+  border-radius: 8px;
+  background-color: rgb(252, 243, 230);
+  margin: 0px 20% 80px;
+}
+
+.error {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+	color: rgb(199, 3, 3);
+  font-size: 16px;
+	border: 1px solid rgb(170, 72, 72);
+  border-radius: 8px;
+  background-color: rgb(246, 215, 215);
+  margin: 0px 20% 80px;
 }
