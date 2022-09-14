@@ -71,6 +71,7 @@ const Checkout = (props) => {
 
   return (
     <form onSubmit={confirmHandler} className={classes.form}>
+      <h1 className={classes.cartTitle}>Enter Your Delivery Address</h1>
       <div className={`${classes.control} ${formInputValidity.name ? '' : classes.invalid}`}>
         <label htmlFor="name" >Your Name</label>
         <input type="text" id='name' ref={nameInputRef} />

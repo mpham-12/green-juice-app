@@ -62,8 +62,12 @@ const Cart = (props) => {
     {cartCtx.items.length > 0 && <button className={classes.submit} onClick={orderHandler}>Submit</button>}
   </div>
 
+const emptyCart = <div className={classes.emptyCart}>
+  <img className={classes.logo} src={logo} alt="" />
+<p className={classes.emptyCart}>No Items in Your Cart.</p>
+</div>
   const cartModalContent = <>
-    {cartItems}
+    {cartCtx.items.length === 0 ? emptyCart : cartItems}
     {isCheckout && <Checkout onSubmit={submitOrderHandler} onCancel={props.onHideCart} />}
     <div className={classes.total}>
       <span>Sub Total</span>
@@ -82,11 +86,11 @@ const Cart = (props) => {
 
   const isSubmittingModalContent = <p>Sending your order!</p>
 
-  const didSubmitModalContent = <>
-  <img className={classes.logo} src={logo} alt="" />
-  <p>Successfully submitted!</p>
-  <p>You will recieve a confirmation email shortly.</p>
-  </>
+  const didSubmitModalContent = <div className={classes.submitOrder}>
+    <img className={classes.logo} src={logo} alt="" />
+    <p>Successfully submitted!</p>
+    <p>You will recieve a confirmation email shortly.</p>
+  </div>
   return (
     <Modal onHide={props.onHideCart}>
       {!isSubmitting && !didSubmit && cartModalContent}
