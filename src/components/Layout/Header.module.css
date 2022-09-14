@@ -4,7 +4,7 @@
   position: sticky;
 	top:0;
 	justify-content: space-between;
-	padding: 10px 20px;
+	padding: 20px 20px;
 	z-index: 10;
 	letter-spacing: 3px;
 	background-color: white;
@@ -24,17 +24,21 @@
 	top: 22%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	color: white;
-	font-size: 45px;
+	color: rgb(27, 125, 27);
+	font-size: 35px;
 	letter-spacing: 5px;
 	text-align: center;
+	margin-top: 35px;
+	line-height: 35px;
 }
 
 .header-description {
 	text-align: center;
 	color: white;
 	position: absolute;
-	top: 30%;
+	font-size: 25px;
+	line-height: 35px;
+	top: 35%;
 	left: 50%;
 	width: 40%;
 	transform: translate(-50%, -50%);
