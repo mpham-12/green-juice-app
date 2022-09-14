@@ -5,19 +5,27 @@ const isEmpty = (value) => {
   return value.trim() === '';
 }
 
+const validEmail = (value)=>{
+  return value.includes('@');
+}
+
 const isSixChars = (value) => {
   return value.trim().length === 6
 }
 
+
+
 const Checkout = (props) => {
   const [formInputValidity, setFormInputValidity] = useState({
     name: true,
+    email: true,
     address: true,
     city: true,
     postal: true,
   })
 
   const nameInputRef = useRef();
+  const emailInputRef = useRef();
   const addressInputRef = useRef();
   const postalInputRef = useRef();
   const cityInputRef = useRef();
@@ -26,23 +34,26 @@ const Checkout = (props) => {
     e.preventDefault();
 
     const enteredName = nameInputRef.current.value;
+    const enteredEmail = emailInputRef.current.value;
     const enteredAddress = addressInputRef.current.value;
     const enteredPostal = postalInputRef.current.value;
     const enteredCity = cityInputRef.current.value;
 
     const enteredNameIsValid = !isEmpty(enteredName);
+    const enteredEmailIsValid = validEmail(enteredEmail);
     const enteredAddressIsValid = !isEmpty(enteredAddress);
     const enteredCityIsValid = !isEmpty(enteredCity);
     const enteredPostalIsValid = isSixChars(enteredPostal);
 
     setFormInputValidity({
       name: enteredNameIsValid,
+      email: enteredEmailIsValid,
       address: enteredAddressIsValid,
       city: enteredCityIsValid,
       postal: enteredPostalIsValid
     })
 
-    const formIsValid = enteredNameIsValid && enteredAddressIsValid && enteredCityIsValid && enteredPostalIsValid;
+    const formIsValid = enteredNameIsValid && enteredEmailIsValid && enteredAddressIsValid && enteredCityIsValid && enteredPostalIsValid;
 
     if (!formIsValid) {
       return;
@@ -50,6 +61,7 @@ const Checkout = (props) => {
 
     props.onSubmit({
       name:enteredName,
+      email: enteredEmail,
       address:enteredAddress,
       postal:enteredPostal,
       city:enteredCity,
@@ -64,6 +76,13 @@ const Checkout = (props) => {
         <input type="text" id='name' ref={nameInputRef} />
         {!formInputValidity.name && <p className={classes.inputValidity}>Please enter a valid name.</p>}
       </div>
+
+      <div className={`${classes.control} ${formInputValidity.email ? '' : classes.invalid}`}>
+        <label htmlFor="email" >Your Email</label>
+        <input type="text" id='email' ref={emailInputRef} />
+        {!formInputValidity.email && <p className={classes.inputValidity}>Please enter a valid email.</p>}
+      </div>
+
       <div className={`${classes.control} ${formInputValidity.address ? '' : classes.invalid}`}>
         <label htmlFor="address" >Address</label>
         <input type="text" id='address' ref={addressInputRef} />

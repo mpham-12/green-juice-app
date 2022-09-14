@@ -1,14 +1,17 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import Modal from '../UI/Modal'
 import classes from './Cart.module.css'
 import CartContext from '../../store/cart-context'
 import CartItem from './CartItem';
 import Checkout from './Checkout';
-import { useState } from 'react';
+import logo from '../../assets/logo.png'
 
 
 const Cart = (props) => {
-  const [isCheckout, setIsCheckout] = useState(false)
+  const [isCheckout, setIsCheckout] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(false);
+
   const cartCtx = useContext(CartContext);
 
   const totalAmount = cartCtx.totalAmount.toFixed(2);
@@ -25,15 +28,20 @@ const Cart = (props) => {
     setIsCheckout(true);
   }
 
-  const submitOrderHandler = (userData) => {
-    fetch('https://press-and-rest-default-rtdb.firebaseio.com/orders.json', {
+  const submitOrderHandler = async (userData) => {
+    setIsSubmitting(true);
+
+    await fetch('https://press-and-rest-default-rtdb.firebaseio.com/orders.json', {
       method: 'POST',
       body: JSON.stringify({
         user: userData,
         orderedItems: cartCtx.items
       })
-    })
-  }
+    });
+
+    setIsSubmitting(false);
+    setDidSubmit(true);
+  };
 
   const cartItems = (<ul className={classes.cart}>
     {cartCtx.items.map((item) => {
@@ -54,23 +62,36 @@ const Cart = (props) => {
     {cartCtx.items.length > 0 && <button className={classes.submit} onClick={orderHandler}>Submit</button>}
   </div>
 
+  const cartModalContent = <>
+    {cartItems}
+    {isCheckout && <Checkout onSubmit={submitOrderHandler} onCancel={props.onHideCart} />}
+    <div className={classes.total}>
+      <span>Sub Total</span>
+      <span>${totalAmount}</span>
+    </div>
+    <div className={classes.total}>
+      <span>Taxes</span>
+      <span>${(totalAmount * 0.13).toFixed(2)}</span>
+    </div>
+    <div className={classes.total}>
+      <span>Total</span>
+      <span>${(totalAmount * 1.13).toFixed(2)}</span>
+    </div>
+    {!isCheckout && cartButtons}
+  </>
+
+  const isSubmittingModalContent = <p>Sending your order!</p>
+
+  const didSubmitModalContent = <>
+  <img className={classes.logo} src={logo} alt="" />
+  <p>Successfully submitted!</p>
+  <p>You will recieve a confirmation email shortly.</p>
+  </>
   return (
     <Modal onHide={props.onHideCart}>
-      {cartItems}
-      {isCheckout && <Checkout onSubmit={submitOrderHandler} onCancel={props.onHideCart} />}
-      <div className={classes.total}>
-        <span>Sub Total</span>
-        <span>${totalAmount}</span>
-      </div>
-      <div className={classes.total}>
-        <span>Taxes</span>
-        <span>${(totalAmount * 0.13).toFixed(2)}</span>
-      </div>
-      <div className={classes.total}>
-        <span>Total</span>
-        <span>${(totalAmount * 1.13).toFixed(2)}</span>
-      </div>
-      {!isCheckout && cartButtons}
+      {!isSubmitting && !didSubmit && cartModalContent}
+      {isSubmitting && isSubmittingModalContent}
+      {!isSubmitting && didSubmit && didSubmitModalContent}
     </Modal>
   );
 }
