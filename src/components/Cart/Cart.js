@@ -41,6 +41,7 @@ const Cart = (props) => {
 
     setIsSubmitting(false);
     setDidSubmit(true);
+    cartCtx.clearCart();
   };
 
   const cartItems = (<ul className={classes.cart}>
@@ -66,6 +67,8 @@ const emptyCart = <div className={classes.emptyCart}>
   <img className={classes.logo} src={logo} alt="" />
 <p className={classes.emptyCart}>No Items in Your Cart.</p>
 </div>
+
+
   const cartModalContent = <>
     {cartCtx.items.length === 0 ? emptyCart : cartItems}
     {isCheckout && <Checkout onSubmit={submitOrderHandler} onCancel={props.onHideCart} />}
@@ -84,12 +87,16 @@ const emptyCart = <div className={classes.emptyCart}>
     {!isCheckout && cartButtons}
   </>
 
-  const isSubmittingModalContent = <p>Sending your order!</p>
+  const isSubmittingModalContent = <div className={classes.emptyCart}>
+  <img className={classes.logo} src={logo} alt="" />
+<p className={classes.emptyCart}>Sending your order!</p>
+</div>
 
   const didSubmitModalContent = <div className={classes.submitOrder}>
     <img className={classes.logo} src={logo} alt="" />
     <p>Successfully submitted!</p>
     <p>You will recieve a confirmation email shortly.</p>
+    <button className={classes.close} onClick={props.onHideCart}>Close</button>
   </div>
   return (
     <Modal onHide={props.onHideCart}>
