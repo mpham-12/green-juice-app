@@ -27,7 +27,7 @@ Rest & Press is a front-end juice delivery app that offers organic cold-press ju
 <img src="./public/form.png" width="700">
 
 #### <h3>Recieve an order confirmation:</h3>
-<img src="./public/order_confirm.png" width="300">
+<img src="./public/order_confirm.png" width="700">
 
 ## Getting Started
 
